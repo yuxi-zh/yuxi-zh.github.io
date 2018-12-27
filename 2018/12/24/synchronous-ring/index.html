@@ -104,20 +104,25 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Yuxiang Zhang&#39;s Blog">
-<meta property="og:url" content="http://yuxi-zh.github.io/index.html">
+  <meta name="description" content="之前已经证明了在异步环上的选主算法消息复杂度为$\Omega(n \log n)$。异步环上基本假设是消息可能会被延迟任意长度的时间，而在同步环基本假设是消息延迟是固定的。后面会看到，在同步环的假设下，一轮执行中有用的信息不但可以根据接收消息获知，而且可以根据未接收到消息获知。这一特性是导致同步环上选主算法时间复杂度上下界不同于异步环的根本原因。 消息复杂度上界$O(n)$非一致算法非一致算法选择">
+<meta name="keywords" content="distributed computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="同步环上的选主问题">
+<meta property="og:url" content="http://yuxi-zh.github.io/2018/12/24/synchronous-ring/index.html">
 <meta property="og:site_name" content="Yuxiang Zhang&#39;s Blog">
+<meta property="og:description" content="之前已经证明了在异步环上的选主算法消息复杂度为$\Omega(n \log n)$。异步环上基本假设是消息可能会被延迟任意长度的时间，而在同步环基本假设是消息延迟是固定的。后面会看到，在同步环的假设下，一轮执行中有用的信息不但可以根据接收消息获知，而且可以根据未接收到消息获知。这一特性是导致同步环上选主算法时间复杂度上下界不同于异步环的根本原因。 消息复杂度上界$O(n)$非一致算法非一致算法选择">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-12-27T14:00:01.332Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Yuxiang Zhang&#39;s Blog">
+<meta name="twitter:title" content="同步环上的选主问题">
+<meta name="twitter:description" content="之前已经证明了在异步环上的选主算法消息复杂度为$\Omega(n \log n)$。异步环上基本假设是消息可能会被延迟任意长度的时间，而在同步环基本假设是消息延迟是固定的。后面会看到，在同步环的假设下，一轮执行中有用的信息不但可以根据接收消息获知，而且可以根据未接收到消息获知。这一特性是导致同步环上选主算法时间复杂度上下界不同于异步环的根本原因。 消息复杂度上界$O(n)$非一致算法非一致算法选择">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuxi-zh.github.io/">
+  <link rel="canonical" href="http://yuxi-zh.github.io/2018/12/24/synchronous-ring/">
 
 
 
@@ -127,7 +132,7 @@
   };
 </script>
 
-  <title>Yuxiang Zhang's Blog</title>
+  <title>同步环上的选主问题 | Yuxiang Zhang's Blog</title>
   
 
 
@@ -175,8 +180,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
-  page-home">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -214,7 +218,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -310,9 +314,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -344,10 +348,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/24/synchronous-ring/" class="post-title-link" itemprop="url">同步环上的选主问题</a>
+          <h1 class="post-title" itemprop="name headline">同步环上的选主问题
+
               
             
           </h1>
@@ -422,9 +424,7 @@
       
 
       
-        
-          
-            <p>之前已经证明了在异步环上的选主算法消息复杂度为$\Omega(n \log n)$。异步环上基本假设是消息可能会被延迟任意长度的时间，而在同步环基本假设是消息延迟是固定的。后面会看到，在同步环的假设下，一轮执行中有用的信息不但可以根据接收消息获知，而且可以根据未接收到消息获知。这一特性是导致同步环上选主算法时间复杂度上下界不同于异步环的根本原因。</p>
+        <p>之前已经证明了在异步环上的选主算法消息复杂度为$\Omega(n \log n)$。异步环上基本假设是消息可能会被延迟任意长度的时间，而在同步环基本假设是消息延迟是固定的。后面会看到，在同步环的假设下，一轮执行中有用的信息不但可以根据接收消息获知，而且可以根据未接收到消息获知。这一特性是导致同步环上选主算法时间复杂度上下界不同于异步环的根本原因。</p>
 <h2 id="消息复杂度上界-O-n"><a href="#消息复杂度上界-O-n" class="headerlink" title="消息复杂度上界$O(n)$"></a>消息复杂度上界$O(n)$</h2><h3 id="非一致算法"><a href="#非一致算法" class="headerlink" title="非一致算法"></a>非一致算法</h3><p>非一致算法选择拥有最小标识符的处理器作为Leader。算法按阶段工作，每个阶段有n轮。在第$i$阶段，如果有一个处理器的标识符为$i$，那么该处理器被选为Leader，并按找环方向传播标识符$i$并结束执行。如果处理器接在阶段$i$接收到标志符$i$，那么它转发消息并结束执行。</p>
 <p>标识符互不相同，一定是拥有最小标志符的处理器被选为Leader。该算法导致n条消息发送，且这n条消息均在Leader被发现的阶段被发送。算法执行的轮数取决于环中最小标识符的大小。如果最小标志符为$m$（从0开始计数），那么共需要$m\cdot(m+1)$轮算法结束。</p>
 <font color="green">为什么标识符为$i$的处理器必须要在第$i$阶段发送消息？因为各处理器互不知道彼此的标识符。</font>
@@ -532,8 +532,6 @@
 
 
 
-          
-        
       
     </div>
 
@@ -554,302 +552,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuxi-zh.github.io/2018/12/24/software-pipelining/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuxiang Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang Zhang's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/24/software-pipelining/" class="post-title-link" itemprop="url">软件流水</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-24 19:59:11 / Modified: 20:05:15" itemprop="dateCreated datePublished" datetime="2018-12-24T19:59:11+08:00">2018-12-24</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/distributed-computing/" rel="tag"># distributed computing</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="软件流水的基本概念"><a href="#软件流水的基本概念" class="headerlink" title="软件流水的基本概念"></a>软件流水的基本概念</h2><p>软件流水是一种挖掘指令级并行的指令调度技术，基本思想是将循环的各次迭代重叠后并行执行。在软件流水中，循环的一次迭代被切分为多个阶段（stage），使得相邻迭代间不同阶段代码可以重叠执行。循环的一次迭代切分的阶段数量记作SC（stage count），相邻两次迭代初始化阶段间隔周期记作II（Initiation Interval）。The initiation interval II between two successive iterations is bounded by both recurrence circuits in the graph (RecMII) and resource constraints of teh architecture (ResMII)。II的下界记作MII（Minimum Initiation Interval，$MII=max(RExMII, ResMII)$）。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuxi-zh.github.io/2018/12/24/hello-world/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Yuxiang Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Yuxiang Zhang's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/24/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
+              <a href="/2018/12/24/software-pipelining/" rel="next" title="软件流水">
+                <i class="fa fa-chevron-left"></i> 软件流水
+              </a>
             
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-12-24 18:51:59" itemprop="dateCreated datePublished" datetime="2018-12-24T18:51:59+08:00">2018-12-24</time>
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -859,14 +591,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -887,8 +620,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -947,6 +689,22 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#消息复杂度上界-O-n"><span class="nav-number">1.</span> <span class="nav-text">消息复杂度上界$O(n)$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#非一致算法"><span class="nav-number">1.1.</span> <span class="nav-text">非一致算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一致算法"><span class="nav-number">1.2.</span> <span class="nav-text">一致算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#消息复杂度分析"><span class="nav-number">1.2.1.</span> <span class="nav-text">消息复杂度分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间复杂度分析"><span class="nav-number">1.2.2.</span> <span class="nav-text">时间复杂度分析</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有限制算法的下界-Omega-n-lg-n"><span class="nav-number">2.</span> <span class="nav-text">有限制算法的下界$\Omega(n\lg n)$</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于比较的算法"><span class="nav-number">2.1.</span> <span class="nav-text">基于比较的算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于比较算法的消息复杂度下界"><span class="nav-number">2.2.</span> <span class="nav-text">基于比较算法的消息复杂度下界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#时间受限算法的消息复杂度-Omega-n-lg-n"><span class="nav-number">2.3.</span> <span class="nav-text">时间受限算法的消息复杂度$\Omega(n\lg n)$</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1082,6 +840,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script src="/js/src/post-details.js?v=6.6.0"></script>
+
+
 
   
 
@@ -1124,16 +886,6 @@
   
 
   
-  
-    
-      
-        
-      
-    
-      
-    
-      
-    
   
 
   
